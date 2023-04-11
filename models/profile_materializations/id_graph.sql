@@ -12,7 +12,13 @@
       slightly out of order) - will only look at last 2 hrs
 */
 
-{{ config(unique_key='segment_id') }}
+{{
+  config(
+    materialized='view',
+    unique_key='segment_id'
+  )
+}}
+
 
 SELECT 
     all_updates.segment_id, 

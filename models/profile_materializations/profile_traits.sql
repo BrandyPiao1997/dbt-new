@@ -12,8 +12,13 @@ Redshift, BigQuery, and Snowflake all maintain a table called INFORMATION_SCHEMA
 Traits will be sequenced in timestamp order (the most recent is prioritized) - future traits are not omitted.
 */
 
-{{ config(unique_key='canonical_segment_id') }}
 
+{{
+  config(
+    materialized='view',
+    unique_key='canonical_segment_id'
+  )
+}}
 
 
 {# Define and execute query for col names (traits) in identifies table #}

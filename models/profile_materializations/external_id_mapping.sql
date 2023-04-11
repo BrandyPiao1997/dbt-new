@@ -9,7 +9,13 @@ A profile is defined by having one or more external IDs, so every profile will b
    associations that changed by virtue of segment ID being remapped).
 */
 
-{{ config(unique_key='external_id_hash') }}
+
+{{
+  config(
+    materialized='view',
+    unique_key='external_id_hash'
+  )
+}}
 
 {# Query for latest build time of id_graph #}
 {%- set get_max_ts %} SELECT CAST(MAX(etl_ts) AS datetime) FROM {{ ref('id_graph') }} {% endset -%}
